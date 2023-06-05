@@ -1,10 +1,6 @@
 export class Stack {
-    private stack: bigint[];
+    private stack: bigint[] = [];
     private max_depth = 1024;
-
-    constructor(){
-        this.stack = [];
-    }
 
     push(item: bigint) {
         if (item < 0n || item > 2n**256n - 1n) {
