@@ -20,10 +20,12 @@ export class ExecutionContext{
         this.stopped = true;
     }
 
-    read_code(num_bytes: number): number {
+    readCode(num_bytes: number): number {
         
         const value = parseInt(String(this.code.slice(this.pc, this.pc + num_bytes)), 16);
         this.pc += num_bytes;
+
+        this.stopped = this.pc >= this.code.length;
         return value;
     }
 }

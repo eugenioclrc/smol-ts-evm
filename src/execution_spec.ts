@@ -12,8 +12,8 @@ describe("ExecutionContextTest", () => {
            
             const execution = new ExecutionContext(code);
             
-            expect(execution.read_code(2)).to.be.equal(0x60);
-            expect(execution.read_code(4)).to.be.equal(0x2255);
+            expect(execution.readCode(2)).to.be.equal(0x60);
+            expect(execution.readCode(4)).to.be.equal(0x2255);
             
         })
     });

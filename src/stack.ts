@@ -14,12 +14,14 @@ export class Stack {
         this.stack.push(item);
     }
     
-    pop() {
+    pop(): bigint {
         if (this.stack.length == 0) {
             throw new Error('StackUnderflow');
         }
+        
+        const ret = this.stack.pop();
+        return ret!;
 
-        return this.stack.pop();
     }
 
     length() {
