@@ -54,6 +54,19 @@ registerInstruction(0x60, "PUSH1", ((ctx: ExecutionContext) => {
     ctx.stack.push(BigInt(ctx.readCode(2)));
 }));
 
+registerInstruction(0x53, "MSTORE8", ((ctx: ExecutionContext) => { 
+    const pos: bigint = ctx.stack.pop() % 256n; // revisar esto
+    const val: bigint = ctx.stack.pop();
+    ctx.memory.store(pos, val);
+}));
+
+registerInstruction(0xf3, "RETURN", ((ctx: ExecutionContext) => { 
+    const pos = ctx.stack.pop();
+    const length = ctx.stack.pop();
+    ctx.setReturnData(pos, length);
+}));
+
+
 /*
 const INSTRUCTIONS = {
   STOP : 0x00,

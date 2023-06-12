@@ -27,6 +27,21 @@ export class Memory {
         return this.memory[Number(offset)] || 0n;
     }
 
+
+    loadRange(offset: bigint, length: bigint) {
+        if  ((offset +length) > (2n**256n - 1n)) {
+            throw new Error("InvalidMemoryAccess");
+        }
+
+        const ret: bigint[] = [];
+
+        for(let i = 0n; i < length; i += 1n) {
+            ret.push(this.load(offset + i));
+        }
+    
+        return ret;
+    }
+
     length() {
         return this.memory.length;
     }

@@ -58,6 +58,31 @@ describe("MemoryUnitTest", () => {
             expect(memory.load(5n)).to.be.equal(0n);
             expect(memory.load(20n)).to.be.equal(0n);
         })
+
+        it("should read a range value in the memory", () => {
+            const memory = new Memory();
+            memory.store(0n, 1n);
+            memory.store(1n, 42n);
+            memory.store(3n, 42n);
+            expect(memory.loadRange(0n, 4n)).to.be.deep.equal([1n, 42n, 0n, 42n]);
+            expect(memory.loadRange(1n, 4n)).to.be.deep.equal([42n, 0n, 42n, 0n]);
+            expect(memory.loadRange(1n, 2n)).to.be.deep.equal([42n, 0n]);
+
+            expect(memory.loadRange(100n, 2n)).to.be.deep.equal([0n, 0n]);
+
+            expect(memory.loadRange(100n, 2n)).to.be.deep.equal([0n, 0n]);
+
+            expect(memory.loadRange(2n**256n - 2n, 1n)).to.be.deep.equal([0n]);
+
+            const _error = { message: '' };
+            try {
+                memory.loadRange(2n**256n - 1n, 1n)
+            } catch (e: any) {
+                _error.message = e.message;
+            }
+            expect(_error.message).to.be.equal('InvalidMemoryAccess'); 
+
+        })
     });
 /*
 

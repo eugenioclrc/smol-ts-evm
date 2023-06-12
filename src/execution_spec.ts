@@ -17,4 +17,26 @@ describe("ExecutionContextTest", () => {
             
         })
     });
+
+    describe("set return data", () => {
+        it("should set return data", () => {
+            const execution = new ExecutionContext();
+            execution.memory.store(0n, 0x01n);
+
+            execution.setReturnData(0n, 1n);
+
+            expect(execution.returndata).to.be.deep.equal([0x01n]);
+            expect(execution.stopped).to.be.equal(true);
+        });
+
+        it("should set return data", () => {
+            const execution = new ExecutionContext();
+            execution.memory.store(2n, 0x01n);
+
+            execution.setReturnData(0n, 4n);
+
+            expect(execution.returndata).to.be.deep.equal([0n, 0n, 1n, 0n]);
+            expect(execution.stopped).to.be.equal(true);
+        });
+    })
 });

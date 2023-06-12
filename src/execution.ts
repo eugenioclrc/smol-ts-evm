@@ -7,6 +7,7 @@ export class ExecutionContext{
     memory: Memory;
     pc: number;
     stopped: boolean;
+    returndata: bigint[] = [];
 
     constructor(code: string = "", pc: number = 0, stack: Stack = new Stack(), memory: Memory = new Memory()) {
         this.code = code;
@@ -28,4 +29,10 @@ export class ExecutionContext{
         this.stopped = this.pc >= this.code.length;
         return value;
     }
+
+    setReturnData(offset: bigint, length: bigint) {
+        this.stopped = true;
+        this.returndata = this.memory.loadRange(offset, length);
+    }
+
 }
