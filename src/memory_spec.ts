@@ -74,13 +74,7 @@ describe("MemoryUnitTest", () => {
 
             expect(memory.loadRange(2n**256n - 2n, 1n)).to.be.deep.equal([0n]);
 
-            const _error = { message: '' };
-            try {
-                memory.loadRange(2n**256n - 1n, 1n)
-            } catch (e: any) {
-                _error.message = e.message;
-            }
-            expect(_error.message).to.be.equal('InvalidMemoryAccess'); 
+            expect(() => memory.loadRange(2n**256n - 1n, 1n)).to.throw('InvalidMemoryAccess');
 
         })
     });
