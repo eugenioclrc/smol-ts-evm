@@ -51,7 +51,7 @@ registerInstruction(0x02, "MUL", ((ctx: ExecutionContext) => {
 }));
 
 registerInstruction(0x60, "PUSH1", ((ctx: ExecutionContext) => {
-    ctx.stack.push(BigInt(ctx.readCode(2)));
+    ctx.stack.push(BigInt(ctx.readCode(1)));
 }));
 
 registerInstruction(0x53, "MSTORE8", ((ctx: ExecutionContext) => { 

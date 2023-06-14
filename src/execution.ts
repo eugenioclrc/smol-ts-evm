@@ -22,11 +22,11 @@ export class ExecutionContext{
     }
 
     readCode(num_bytes: number): number {
-        
-        const value = parseInt(String(this.code.slice(this.pc, this.pc + num_bytes)), 16);
+        // num_bytes * 2 because each byte is represented by 2 characters
+        const value = parseInt(String(this.code.slice(this.pc * 2, this.pc * 2 + num_bytes * 2)), 16);
         this.pc += num_bytes;
 
-        this.stopped = this.pc >= this.code.length;
+        this.stopped = this.pc >= (this.code.length / 2);
         return value;
     }
 

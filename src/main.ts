@@ -2,12 +2,12 @@ import { ExecutionContext } from "./execution";
 import { Instruction, INSTRUCTIONS_BY_OPCODE } from "./instructions";
 
 function decodeOpcode(context: ExecutionContext): Instruction {
-    if (context.pc < 0 || context.pc >= context.code.length) {
+    if (context.pc < 0 || context.pc >= context.code.length / 2) {
         //throw new InvalidCodeOffset({ code: context.code, pc: context.pc });
         throw new Error("InvalidCodeOffset");
     }
 
-    const opcode = context.readCode(2);
+    const opcode = context.readCode(1);
     const instruction = INSTRUCTIONS_BY_OPCODE[opcode];
     console.log(opcode);
     if (!instruction) {
