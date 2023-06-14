@@ -68,6 +68,14 @@ registerInstruction(0xf3, "RETURN", ((ctx: ExecutionContext) => {
     ctx.setReturnData(pos, length);
 }));
 
+registerInstruction(0x58, "PC", ((ctx: ExecutionContext) => { 
+    ctx.stack.push(BigInt(ctx.pc) - 1n);
+}));
+
+registerInstruction(0x56, "JUMP", ((ctx: ExecutionContext) => { 
+    ctx.pc = Number(ctx.stack.pop());
+}));
+
 
 /*
 const INSTRUCTIONS = {

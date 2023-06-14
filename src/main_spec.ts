@@ -42,4 +42,24 @@ describe("ExecutionContextTest", () => {
         })
     });
 
+    describe("JUMPs", () => {
+
+        it("should work PC", () => {
+            const context = run("58");
+            expect(context.stack.pop()).to.be.equal(0x00n);
+        });
+
+        it("should work another PC", () => {
+            const context = run("604258");
+            expect(context.stack.pop()).to.be.equal(0x02n);
+            expect(context.stack.pop()).to.be.equal(0x42n);
+        });
+
+        it("should work JUMP", () => {
+            const context = run("60ff56");
+            expect(context.pc).to.be.equal(0xff);
+        });
+
+    })
+
 });
