@@ -55,8 +55,10 @@ registerInstruction(0x60, "PUSH1", ((ctx: ExecutionContext) => {
 }));
 
 registerInstruction(0x53, "MSTORE8", ((ctx: ExecutionContext) => { 
-    const pos: bigint = ctx.stack.pop() % 256n; // revisar esto
-    const val: bigint = ctx.stack.pop();
+    const pos: bigint = ctx.stack.pop();
+    // MSTORE8 guarda un byte, un byte es un valor en el intervalo [0, 255]
+    // por ello es el `% 256n`
+    const val: bigint = ctx.stack.pop() % 256n;
     ctx.memory.store(pos, val);
 }));
 
