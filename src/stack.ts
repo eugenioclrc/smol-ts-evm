@@ -24,6 +24,14 @@ export class Stack {
 
     }
 
+    peek(item: number) {
+        if (item < 0 || item >= this.stack.length) {
+            throw new Error('InvalidStackItem');
+        }
+
+        return this.stack[item];
+    }
+
     length() {
       return this.stack.length;
     }

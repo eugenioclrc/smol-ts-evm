@@ -73,9 +73,24 @@ registerInstruction(0x58, "PC", ((ctx: ExecutionContext) => {
 }));
 
 registerInstruction(0x56, "JUMP", ((ctx: ExecutionContext) => { 
-    ctx.pc = Number(ctx.stack.pop());
+    const jumpdest = Number(ctx.stack.pop());
+    if (!ctx.validjumpdest.has(jumpdest)) {
+        throw new Error("InvalidJumpDest");
+    }
+
+    ctx.pc = jumpdest;
 }));
 
+registerInstruction(0x5b, "JUMPDEST", ((ctx: ExecutionContext) => {
+    // esto es para marcar saltos validos
+}));
+
+registerInstruction(0x80, "DUP1", ((ctx: ExecutionContext) => {
+    ctx.stack.push(ctx.stack.peek(0));
+}));
+
+
+// registerInstruction(, "JUMPDEST", ((ctx: ExecutionContext) => {
 
 /*
 const INSTRUCTIONS = {

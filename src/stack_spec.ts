@@ -65,5 +65,22 @@ describe("StackUnitTest", () => {
             expect(actual).to.be.equal(item);
         });
     });
-    
+
+    describe("Peek", () => {
+        let stack: Stack;
+        let item = 1n;
+        beforeEach(() => {
+            stack = new Stack();
+            stack.push(item);
+        });
+
+        it("should peek the item in the stack", () => {
+            const actual = stack.peek(0);
+            expect(actual).to.be.equal(item);
+        });
+
+        it("should revert if the item is not in the stack", () => {
+            expect(() => stack.peek(1)).to.throw('InvalidStackItem');
+        });
+    });
 });

@@ -56,10 +56,28 @@ describe("ExecutionContextTest", () => {
         });
 
         it("should work JUMP", () => {
-            const context = run("60ff56");
-            expect(context.pc).to.be.equal(0xff);
+            expect(() => run("60ff56")).to.throw("InvalidJumpDest");
         });
 
+        it("should work JUMP", () => {
+            const context = run("60055660015b");            
+            expect(context.stack.length()).to.be.equal(0);
+        });
     })
+
+    describe("DUPs", () => {
+        it("should work DUP1", () => {
+            const context = run("600280");
+            expect(context.stack.peek(0)).to.be.equal(0x02n);
+            expect(context.stack.peek(1)).to.be.equal(0x02n);
+        });
+    });
+
+    describe("DUPs", () => {
+        it("should work DUP1", () => {
+            const context = run("5b60025b605b");
+            expect(context.validjumpdest).to.be.deep.equal(new Set([0, 3]));
+        });
+    });
 
 });

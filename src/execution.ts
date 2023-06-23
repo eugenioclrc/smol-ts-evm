@@ -8,6 +8,7 @@ export class ExecutionContext{
     pc: number;
     stopped: boolean;
     returndata: bigint[] = [];
+    validjumpdest: Set<number> = new Set([]);
 
     constructor(code: string = "", pc: number = 0, stack: Stack = new Stack(), memory: Memory = new Memory()) {
         this.code = code;
@@ -15,6 +16,21 @@ export class ExecutionContext{
         this.memory = memory;
         this.pc = pc;
         this.stopped = false;
+        this.initJumpDest(code);
+    }
+
+    initJumpDest(code: string) {
+        let i = 0;
+        while (i < code.length) {
+            const opcode = parseInt(code.slice(i, i + 2), 16);
+            if (opcode == 0x5b) {
+                this.validjumpdest.add(i / 2);
+            } else if(opcode == 0x60) {
+                // @audit recordar preparar todo para skipear push2 ... push32, preguntarle a adri
+                i += 2;
+            }
+            i += 2;
+        }
     }
 
     stop() {
