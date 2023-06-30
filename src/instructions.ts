@@ -89,8 +89,45 @@ registerInstruction(0x80, "DUP1", ((ctx: ExecutionContext) => {
     ctx.stack.push(ctx.stack.peek(0));
 }));
 
+registerInstruction(0x90, "SWAP1", ((ctx: ExecutionContext) => {
+    const N = 1;
+    if (ctx.stack.length() < N + 1) {
+        throw new Error("StackUnderflow");
+    }
 
-// registerInstruction(, "JUMPDEST", ((ctx: ExecutionContext) => {
+    let aux:bigint[] = [];
+    for (let i = 0; i < N + 1; i++) {
+        aux.push(ctx.stack.pop());
+    }
+
+    const swap0 = aux[0];
+    aux[0] = aux[N];
+    aux[N] = swap0;
+
+    for (let i = 0; i < N + 1; i++) {
+        ctx.stack.push(aux[N - i]);
+    }
+}));
+
+registerInstruction(0x91, "SWAP2", ((ctx: ExecutionContext) => { // SWAP N
+    const N = 2;
+    if (ctx.stack.length() < N + 1) {
+        throw new Error("StackUnderflow");
+    }
+
+    let aux:bigint[] = [];
+    for (let i = 0; i < N + 1; i++) {
+        aux.push(ctx.stack.pop());
+    }
+
+    const swap0 = aux[0];
+    aux[0] = aux[N];
+    aux[N] = swap0;
+
+    for (let i = 0; i < N + 1; i++) {
+        ctx.stack.push(aux[N - i]);
+    }
+}));
 
 /*
 const INSTRUCTIONS = {

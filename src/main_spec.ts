@@ -80,4 +80,32 @@ describe("ExecutionContextTest", () => {
         });
     });
 
+    describe("Swap1", () => {
+        it("should  fail", () => {
+            expect(() => run("602090")).to.throw("StackUnderflow");
+        });
+            
+        it("should push 32 to stack", () => {
+
+            const context = run("6020600190");
+            // PUSH1 20    // [ 32 ]
+            // PUSH1 01    // [ 1, 32 ]
+            // SWAP1       // [ 32, 1 ]
+
+            expect(context.stack.pop()).to.be.equal(BigInt(0x20));
+            expect(context.stack.pop()).to.be.equal(BigInt(0x01));
+        })
+
+        it("should swap2", () => {
+
+            const context = run("60206001600291");
+            // PUSH1 20    // [ 32 ]
+            // PUSH1 01    // [ 1, 32 ]
+            // PUSH1 02    // [ 2, 1, 32 ]
+            // SWAP2       // [ 32, 1, 2 ]
+
+            expect(context.stack.pop()).to.be.equal(BigInt(0x20));
+            expect(context.stack.pop()).to.be.equal(BigInt(0x01));
+            expect(context.stack.pop()).to.be.equal(BigInt(0x02));
+        })
 });
