@@ -23,6 +23,7 @@ fue sacado de grandes mentes, y yo solo lo estoy replicando para aprender.
 3) [Parte 3](https://www.youtube.com/watch?v=uSPQBIZ6jxg), implementamos MSTORE8 y RETURN con [magnetto_eth](https://twitter.com/magnetto_eth)
 4) [Parte 4](https://www.youtube.com/watch?v=lK2zY8HfG9w), codeamos los opcodes PC y JUMP con [0xJuancito](https://twitter.com/0xJuancito)
 5) [Parte 5](https://www.youtube.com/watch?v=_krMqJG9JOc), codeamos los opcodes DUP1 y JUMPDEST con [Adri](https://twitter.com/adrianromero)
+6) [Parte 6](https://youtu.be/kyCdxJEgzRg), codeamos los opcodes SWAP1, JUMPI y EQ con [tqts](https://twitter.com/tqtsar)
 
 <p align="center">
   <img src="./img/hacker-evm.jpg" alt="kakeando una ethereum virtual machine" width="400">

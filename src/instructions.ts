@@ -129,6 +129,25 @@ registerInstruction(0x91, "SWAP2", ((ctx: ExecutionContext) => { // SWAP N
     }
 }));
 
+registerInstruction(0x57, "JUMPI", ((ctx: ExecutionContext) => {
+    const jumpdest = Number(ctx.stack.pop());
+    const condition = ctx.stack.pop();
+
+    if (!ctx.validjumpdest.has(jumpdest)) {
+        throw new Error("InvalidJumpDest");
+    }
+
+    if (condition != 0n) {
+        ctx.pc = jumpdest;
+    }
+}));
+
+registerInstruction(0x14, "EQ", ((ctx: ExecutionContext) => {
+    const val0 = ctx.stack.pop();
+    const val1 = ctx.stack.pop();
+    ctx.stack.push(val0 == val1 ? 1n : 0n);
+}));
+
 /*
 const INSTRUCTIONS = {
   STOP : 0x00,

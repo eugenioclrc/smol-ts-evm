@@ -108,4 +108,30 @@ describe("ExecutionContextTest", () => {
             expect(context.stack.pop()).to.be.equal(BigInt(0x01));
             expect(context.stack.pop()).to.be.equal(BigInt(0x02));
         })
+
+        it("should JUMPI", () => {
+            const context = run("5b6000600057");
+            expect(context.stack.length()).to.be.equal(0);
+        });
+
+        it("should JUMPI 2", () => {
+            const context = run("60005b600101806005146012576002565b");
+/*
+[00]	PUSH1	00
+[02]	JUMPDEST	
+[03]	PUSH1	01
+[05]	ADD	
+[06]	DUP1	
+[07]	PUSH1	05
+[09]	EQ	
+[0a]	PUSH2	0012
+[0d]	JUMPI	
+[0e]	PUSH2	0002
+[11]	JUMP	
+[12]	JUMPDEST
+*/
+            expect(context.stack.length()).to.be.equal(1);
+            expect(context.stack.pop()).to.be.equal(5n);
+        });
+    });
 });
